@@ -1,14 +1,14 @@
 var mars = [
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null]
+  [null, null, null, null, null, null, Q, null, null, Q],
+  [null, null, null, null, null, Q, null, null, null, Q],
+  [null, null, Q, null, null, null, null, null, null, Q],
+  [Q, null, null, null, null, null, null, null, null, Q],
+  [null, null, null, Q, null, null, null, null, null, Q],
+  [null, null, null, Q, null, null, null, null, null, Q],
+  [null, null, Q, null, null, null, null, null, null, Q,],
+  [null, null, null, null, Q, null, null, null, null, Q,],
+  [null, null, null, null, Q, null, null, null, null, Q,],
+  [null, null, null, null, null, null, null, null, Q, Q,]
 ]
 
 var rover = {
@@ -48,7 +48,6 @@ function turnLeft(rover) {
 			console.log('The rover is now facing South.');
 			break;
 	}
-// 	console.log('turnLeft was called.');
 	console.log("");
 	console.log('New coordinates: ' + rover.x, ',' + rover.y);
 	console.log("");
@@ -92,7 +91,6 @@ function turnRight(rover) {
 			console.log('The rover is now facing North.');
 			break;
 	}
-// 	console.log('turnRight was called.');
 	console.log("");
 	console.log('New coordinates: ' + rover.x, ',' + rover.y);
 	console.log("");
@@ -102,9 +100,11 @@ function moveForward(rover) {
 	switch (rover.direction) {
 		case 'N':
 			rover.y--;
-			console.log('The rover has moved North.');
-			console.log("");
-			break;
+			if(rover.y >= 0 && rover.y <= 9){
+				console.log('The rover has moved North.');
+				console.log("");
+				break;
+			}
 
 		case 'S':
 			rover.y++;
@@ -124,7 +124,36 @@ function moveForward(rover) {
 			console.log("");
 			break;
 	}
-// 	console.log('moveForward was called.');
+
+	function moveBackwards(rover) {
+		switch (rover.direction) {
+			// case 'N':
+			// 	rover.y--;
+			// 	if(rover.y >= 0 && rover.y <= 9){
+			// 		console.log('The rover has moved North.');
+			// 		console.log("");
+			// 		break;
+			// 	}
+	
+			case 'S':
+				rover.y++;
+				console.log('The rover has moved South.');
+				console.log("");
+				break;
+	
+			case 'E':
+				rover.x++;
+				console.log('The rover has moved East.');
+				console.log("");
+				break;
+	
+			case 'W':
+				rover.x--;
+				console.log('The rover has moved West.');
+				console.log("");
+				break;
+		}
+
 	console.log("");
 	console.log('New coordinates: ' + rover.x, ',' + rover.y);
 	rover.travelLog.push(rover.x + "," + rover.y);
@@ -158,7 +187,8 @@ function listCommands(movementCommands){
     }
   }
 }
-listCommands("rrffffff");
+
+listCommands("frlfrfrlrlflfrflrflrflrrlfflrfrlffffffff");
 
 console.log('Standby:'); 
 console.log('Your rover is transmitting the travelLog:');
